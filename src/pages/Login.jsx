@@ -22,11 +22,11 @@ const LoginContainer = styled.div`
   min-height: auto;
   padding: 2rem;
   z-index: 1;
-  
-  width: 90%;
-  max-width: 600px; /* Ancho máximo para pantallas grandes */
+
+  width: 90%; /* Ancho predeterminado para pantallas pequeñas */
+  max-width: 400px; /* Reducir el ancho máximo para evitar desbordes */
   margin: 2rem auto; /* Reducir el margen superior */
-  padding: 4rem; /* Reducir el padding interno */
+  padding: 2rem; /* Reducir el padding interno */
   background-color: var(--background-secondary);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -37,6 +37,7 @@ const LoginContainer = styled.div`
 
   @media (min-width: 768px) {
     width: 60%; /* Hacer la tarjeta más ancha en pantallas grandes */
+    max-width: 600px; /* Limitar el ancho máximo */
     padding: 3rem; /* Ajustar el padding para pantallas grandes */
   }
 `;
