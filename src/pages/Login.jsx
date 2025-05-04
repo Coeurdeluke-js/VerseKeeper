@@ -19,13 +19,14 @@ const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 80px); // Corregido de 80x a 80px
+  min-height: auto;
   padding: 2rem;
   z-index: 1;
   
-  max-width: 500px;
-  margin: 4rem auto;
-  padding: 8rem;
+  width: 90%;
+  max-width: 600px; /* Ancho máximo para pantallas grandes */
+  margin: 2rem auto; /* Reducir el margen superior */
+  padding: 4rem; /* Reducir el padding interno */
   background-color: var(--background-secondary);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -33,6 +34,11 @@ const LoginContainer = styled.div`
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
+
+  @media (min-width: 768px) {
+    width: 60%; /* Hacer la tarjeta más ancha en pantallas grandes */
+    padding: 3rem; /* Ajustar el padding para pantallas grandes */
+  }
 `;
 
 const Logo = styled.img`

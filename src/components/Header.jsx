@@ -57,11 +57,16 @@ const Logo = styled.div`
 const NavLinks = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem; /* Espaciado uniforme entre los elementos */
+  flex-wrap: nowrap; /* Evitar que los elementos se envuelvan en una nueva fila */
   
-  a {
+  a, button {
+    display: flex;
+    align-items: center;
     color: ${props => props.theme === 'dark' ? 'var(--golden)' : 'inherit'};
     transition: color 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
     
     &:hover {
       color: ${props => props.theme === 'dark' ? '#c09c30' : 'var(--golden)'};
@@ -69,11 +74,11 @@ const NavLinks = styled.div`
   }
   
   @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    display: ${props => props.$isOpen ? 'flex' : 'none'};
-    padding-top: 1rem;
+    flex-direction: row; /* Mantenerlos en una fila horizontal */
+    justify-content: center; /* Centrar los elementos horizontalmente */
+    width: 100%; /* Asegurar que ocupen todo el ancho */
+    padding-top: 0;
+    display: ${props => (props.$isOpen ? 'flex' : 'none')}; /* Mostrar solo si el menú está abierto */
   }
 `;
 
@@ -138,6 +143,13 @@ const LogoutButton = styled.button`
     background-color: rgba(0, 0, 0, 0.1);
     color: var(--golden);
   }
+      span {
+    order: 1; /* El texto aparece primero */
+  }
+
+  svg {
+    order: 2; /* El ícono aparece después del texto */
+  }
 `;
 
 const Header = () => {
@@ -172,24 +184,25 @@ const Header = () => {
         </Logo>
         
         <NavLinks $isOpen={isMenuOpen} theme={theme}>
-          <Link to="/" onClick={() => setIsMenuOpen(false)}>Inicio</Link>
-          
-          {user ? (
-            <>
-              <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>Mis Versículos</Link>
-              <LogoutButton onClick={handleSignOut} theme={theme}>
-                <FaSignOutAlt />
-                <span>Cerrar Sesión</span>
-              </LogoutButton>
-            </>
-          ) : (
-            <Link to="/login" onClick={() => setIsMenuOpen(false)}>Iniciar Sesión</Link>
-          )}
-          
-          <ThemeToggle onClick={toggleTheme} title="Cambiar tema" theme={theme}>
-            {theme === 'light' ? <FaMoon /> : <FaSun />}
-          </ThemeToggle>
-        </NavLinks>
+  <Link to="/" onClick={() => setIsMenuOpen(false)}>Inicio</Link>
+  
+  {user ? (
+    <>
+      <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>Mis Versículos</Link>
+      <LogoutButton onClick={handleSignOut} theme={theme}>
+        <FaSignOutAlt />
+        <span>Cerrar Sesión</span>
+      </LogoutButton>
+    </>
+  ) : (
+    <Link to="/login" onClick={() => setIsMenuOpen(false)}>Iniciar Sesión</Link>
+  )}
+  
+  <ThemeToggle onClick={toggleTheme} title="Cambiar tema" theme={theme}>
+    {theme === 'light' ? <FaMoon /> : <FaSun />}
+  </ThemeToggle>
+</NavLinks>
+
       </Nav>
     </HeaderContainer>
   );
