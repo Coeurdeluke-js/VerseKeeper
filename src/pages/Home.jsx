@@ -21,26 +21,28 @@ const Hero = styled.div`
   padding: 2rem;
   box-sizing: border-box;
   margin-bottom: 0;
-  background-color: var(--background-primary);
+  background-color: #0a1b2a; /* Color fijo oscuro para ambos modos */
 `;
 
 const HeroTitle = styled.h1`
   font-size: 3.5rem;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #ffffff; /* Color blanco fijo para ambos modos */
   position: relative;
   z-index: 2;
   font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 `;
 
 const HeroSubtitle = styled.p`
   font-size: 1.3rem;
-  color: var(--text-secondary);
+  color: #f0f0f0; /* Color claro fijo para ambos modos */
   max-width: 800px;
   margin: 0 auto 2rem;
   position: relative;
   z-index: 2;
   font-weight: 500;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 `;
 
 // Define HeroImage here, with other styled components
@@ -51,30 +53,16 @@ const HeroImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
+  opacity: 0.3; /* Opacidad reducida */
   z-index: 1;
+  filter: brightness(0.9) contrast(1.1); /* Filtro más oscuro para ambos modos */
 `;
 
-const Title = styled.h1`
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  color: #ffffff; /* Cambiado a blanco puro para mayor contraste */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Sombra más oscura */
-  position: relative;
-  z-index: 2;
-  font-weight: bold; /* Añadido para mayor contraste */
-`;
+// Eliminar esta declaración duplicada de Title ya que ya tenemos HeroTitle
+// const Title = styled.h1`...`;
 
-const Subtitle = styled.p`
-  font-size: 1.3rem;
-  color: #f0f0f0; /* Cambiado a un tono más claro */
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); /* Sombra más oscura */
-  position: relative;
-  z-index: 2;
-  font-weight: 500; /* Añadido para mayor contraste */
-`;
+// Eliminar esta declaración duplicada de Subtitle ya que ya tenemos HeroSubtitle
+// const Subtitle = styled.p`...`;
 
 const CTAButton = styled(Link)`
   display: inline-block;
@@ -86,12 +74,12 @@ const CTAButton = styled(Link)`
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para el botón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
   
   &:hover {
     background-color: #c09c30;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
     color: var(--accent-blue);
   }
 `;

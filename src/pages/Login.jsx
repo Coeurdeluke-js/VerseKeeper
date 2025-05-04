@@ -19,13 +19,13 @@ const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px); // Corregido de 80x a 80px
   padding: 2rem;
   z-index: 1;
   
   max-width: 500px;
   margin: 4rem auto;
-  padding: 2rem;
+  padding: 8rem;
   background-color: var(--background-secondary);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -36,7 +36,7 @@ const LoginContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 150px;  /* Aumentado de 120px a 150px */
+  width: 200px;  /* Aumentado para que sea más grande */
   margin-bottom: 1.5rem;
 `;
 
@@ -66,7 +66,6 @@ const GoogleButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-bottom: 1rem;
   
   &:hover {
     background-color: #c09c30;
@@ -123,16 +122,19 @@ const Login = () => {
   return (
     <LoginPageContainer>
       <LoginContainer>
-        <Logo src="/logo.png" alt="VerseKeeper Logo" />
-        <Title>VerseKeeper</Title>
-        <Subtitle>Tu compañero para estudiar y reflexionar sobre las escrituras</Subtitle>
-        
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <Logo src="/logo.png" alt="VerseKeeper Logo" style={{ width: "200px" }} />
+        {/* Se eliminan los textos redundantes */}
         
         <GoogleButton onClick={handleGoogleSignIn} disabled={loading}>
-          {loading ? <Spinner><FaSpinner /></Spinner> : <FaGoogle />}
-          {loading ? 'Iniciando sesión...' : 'Continuar con Google'}
+          {loading ? (
+            <Spinner><FaSpinner /></Spinner>
+          ) : (
+            <FaGoogle />
+          )}
+          Continuar con Google
         </GoogleButton>
+        
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </LoginContainer>
     </LoginPageContainer>
   );

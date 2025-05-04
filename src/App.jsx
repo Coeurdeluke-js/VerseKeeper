@@ -12,17 +12,7 @@ import AuthCallback from './components/AuthCallback.jsx';
 import './App.css';
 import SplashScreen from './components/SplashScreen.jsx';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
-  
-  if (loading) return <div>Cargando...</div>;
-  
-  if (!user) return <Navigate to="/login" replace />;
-  
-  return children;
-};
-
+import ProtectedRoute from './components/ProtectedRoute.jsx'; // Agregar esta línea
 function AppContent() {
   const { user } = useContext(AuthContext);
   const location = useLocation();

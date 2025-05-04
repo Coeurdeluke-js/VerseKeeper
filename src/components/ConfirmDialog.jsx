@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const DialogOverlay = styled.div`
+const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -12,108 +12,57 @@ const DialogOverlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
 `;
 
-const DialogContainer = styled.div`
+const ModalContent = styled.div`
   background-color: var(--background-secondary);
-  border-radius: 12px;
-  padding: 1.5rem;
-  max-width: 400px;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
   width: 90%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  animation: slideUp 0.3s ease;
-  
-  @keyframes slideUp {
-    from { 
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    to { 
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    width: 85%;
-    padding: 1.2rem;
-  }
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
 
-const DialogTitle = styled.h3`
+const ModalTitle = styled.h3`
+  margin-top: 0;
   color: var(--text-primary);
-  margin-bottom: 0.8rem;
-  font-size: 1.3rem;
-  
-  @media (max-width: 480px) {
-    font-size: 1.1rem;
-  }
 `;
 
-const DialogMessage = styled.p`
-  color: var(--text-primary);
-  font-size: 1.1rem;
+const ModalMessage = styled.p`
   margin-bottom: 1.5rem;
-  
-  @media (max-width: 480px) {
-    font-size: 0.95rem;
-    margin-bottom: 1.2rem;
-  }
+  color: var(--text-secondary);
 `;
 
-const ButtonContainer = styled.div`
+const ButtonGroup = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 1rem;
-  
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
 `;
 
 const Button = styled.button`
-  padding: 0.7rem 1.5rem;
-  border-radius: 25px;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+`;
+
+const CancelButton = styled(Button)`
+  background-color: var(--background-primary);
+  color: var(--text-primary);
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  @media (max-width: 480px) {
-    padding: 0.8rem;
-    width: 100%;
+    background-color: #e0e0e0;
   }
 `;
 
 const ConfirmButton = styled(Button)`
-  background-color: var(--golden);
-  color: var(--deep-navy);
-  border: none;
+  background-color: #e74c3c;
+  color: white;
   
   &:hover {
-    background-color: #c09c30;
-  }
-`;
-
-const CancelButton = styled(Button)`
-  background-color: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--text-secondary);
-  
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #c0392b;
   }
 `;
 
@@ -121,16 +70,16 @@ const ConfirmDialog = ({ isOpen, title, message, onConfirm, onCancel }) => {
   if (!isOpen) return null;
   
   return (
-    <DialogOverlay onClick={(e) => e.target === e.currentTarget && onCancel()}>
-      <DialogContainer>
-        {title && <DialogTitle>{title}</DialogTitle>}
-        <DialogMessage>{message}</DialogMessage>
-        <ButtonContainer>
-          <ConfirmButton onClick={onConfirm}>Aceptar</ConfirmButton>
+    <ModalOverlay onClick={onCancel}>
+      <ModalContent onClick={e => e.stopPropagation()}>
+        <ModalTitle>{title || '¿Estás seguro?'}</ModalTitle>
+        <ModalMessage>{message}</ModalMessage>
+        <ButtonGroup>
           <CancelButton onClick={onCancel}>Cancelar</CancelButton>
-        </ButtonContainer>
-      </DialogContainer>
-    </DialogOverlay>
+          <ConfirmButton onClick={onConfirm}>Confirmar</ConfirmButton>
+        </ButtonGroup>
+      </ModalContent>
+    </ModalOverlay>
   );
 };
 
